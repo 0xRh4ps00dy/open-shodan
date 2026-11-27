@@ -1,0 +1,317 @@
+.section {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    padding: 14px 18px 10px 18px;
+    background: #fafbfc;
+}
+.section legend {
+    font-weight: 700;
+    color: #23272f;
+    font-size: 1.08em;
+    letter-spacing: 0.1em;
+    padding: 0 8px;
+}
+
+.curl-block-visible {
+    margin-top: 18px;
+    margin-bottom: 0;
+    background: #f8f8fa;
+    border-radius: 8px;
+    padding: 14px 12px 14px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 1px 2px rgba(40,60,90,0.03);
+}
+.curl-block-visible label {
+    font-weight: 700;
+    color: #23272f;
+    margin-right: 4px;
+}
+.curl-command {
+    font-family: 'Fira Mono', 'Consolas', monospace;
+    background: #eaeaea;
+    border-radius: 4px;
+    padding: 6px 10px;
+    margin: 0;
+    font-size: 0.98em;
+    color: #222;
+    flex: 1 1 auto;
+    user-select: all;
+    overflow-x: auto;
+    min-width: 180px;
+}
+#copyCurl {
+    background: #23272f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 7px 16px;
+    font-size: 0.97em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+#copyCurl.copied {
+    background: #388e3c;
+}
+#copyCurl:hover {
+    background: #444857;
+}
+
+.loader {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2.5px solid #bbb;
+    border-top: 2.5px solid #23272f;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/* Google Fonts import */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    background: #f6f7fb;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 36px auto;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(40, 60, 90, 0.07);
+    padding: 32px 32px 32px 32px;
+    border: 1px solid #ececec;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #23272f;
+    margin-bottom: 18px;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-size: 1.7em;
+}
+
+.form-group {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 180px;
+    min-width: 140px;
+    max-width: 260px;
+}
+
+form {
+    margin-bottom: 22px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+input[type="text"], input[type="number"] {
+    padding: 10px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 1em;
+    background: #fafbfc;
+    transition: border 0.2s;
+    outline: none;
+    min-width: 0;
+    flex: 1 1 80;
+    max-width: 100%;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+    border-color: #23272f;
+}
+
+button {
+    background: #23272f;
+    color: #fff;
+    border: none;
+    padding: 11px 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 700;
+    transition: background 0.15s, transform 0.1s;
+    letter-spacing: 0.2px;
+}
+
+button:hover {
+    background: #444857;
+    transform: translateY(-1px) scale(1.01);
+}
+
+.results {
+    margin-top: 18px;
+    background: #fafbfc;
+    border-radius: 8px;
+    padding: 18px;
+    min-height: 40px;
+    font-size: 1.07em;
+    color: #23272f;
+    word-break: break-all;
+    box-shadow: 0 1px 2px rgba(40,60,90,0.03);
+    border: 1px solid #ececec;
+    white-space: pre-wrap;
+}
+
+.curl-block {
+    margin: 18px 0 0 0;
+    background: #f3f3f3;
+    border-radius: 8px;
+    padding: 12px 12px 12px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    border: 1px solid #e0e0e0;
+}
+.curl-block label {
+    font-weight: 700;
+    color: #23272f;
+    margin-right: 4px;
+}
+.curl-command {
+    font-family: 'Fira Mono', 'Consolas', monospace;
+    background: #eaeaea;
+    border-radius: 4px;
+    padding: 6px 10px;
+    margin: 0;
+    font-size: 0.98em;
+    color: #222;
+    flex: 1 1 auto;
+    user-select: all;
+    overflow-x: auto;
+}
+#copyCurl {
+    background: #23272f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 7px 16px;
+    font-size: 0.97em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+#copyCurl:hover {
+    background: #444857;
+}
+
+label {
+    font-weight: 700;
+    margin-right: 6px;
+    margin-bottom: 12px;
+    color: #23272f;
+    letter-spacing: 0.1px;
+    font-size: 0.97em;
+}
+
+.curl-section {
+    margin: 24px 0 0 0;
+    background: #23272f;
+    border-radius: 8px;
+    padding: 18px 18px 12px 18px;
+    box-shadow: 0 2px 8px rgba(40,60,90,0.07);
+    color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.curl-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 1.08em;
+}
+
+.curl-command {
+    font-family: 'Fira Mono', 'Consolas', monospace;
+    background: #181b20;
+    border-radius: 4px;
+    padding: 10px 12px;
+    margin: 0;
+    font-size: 1em;
+    color: #aeefff;
+    user-select: all;
+    overflow-x: auto;
+    white-space: pre-wrap;
+}
+
+#copyCurl {
+    background: #388e3c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 7px 18px;
+    font-size: 0.97em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-left: 12px;
+    margin-bottom: 12px;
+}
+
+#copyCurl.copied {
+    background: #43a047;
+}
+#copyCurl:hover {
+    background: #2e7031;
+}
+
+@media (max-width: 1100px) {
+    .container {
+        max-width: 99vw;
+        padding: 16px 2vw;
+        border-radius: 12px;
+    }
+    .form-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .form-field {
+        max-width: 100%;
+    }
+    h1 {
+        font-size: 1.3em;
+    }
+    .results {
+        padding: 14px;
+        font-size: 1em;
+    }
+    .curl-block {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+}

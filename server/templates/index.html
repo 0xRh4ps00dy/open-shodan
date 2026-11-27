@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscador Shodan API</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="icon" type="image/png" href="static/hacker.png">
+</head>
+<body>
+    <div class="container">
+        <h1>Buscador Shodan API</h1>
+        <form id="searchForm">
+            <fieldset class="section">
+                <legend>Filtro de Servicio</legend>
+                <div class="form-group">
+                    <div class="form-field">
+                        <label for="title">Título</label>
+                        <input type="text" id="title" name="title" placeholder="nginx, Apache, etc">
+                    </div>
+                    <div class="form-field">
+                        <label for="html">HTML</label>
+                        <input type="text" id="html" name="html" placeholder="welcome to nginx">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="section">
+                <legend>Filtro de Red</legend>
+                <div class="form-group">
+                    <div class="form-field">
+                        <label for="domain">Dominio</label>
+                        <input type="text" id="domain" name="domain" placeholder="ejemplo.com">
+                    </div>
+                    <div class="form-field">
+                        <label for="ip">IP</label>
+                        <input type="text" id="ip" name="ip" placeholder="192.168.1.1">
+                    </div>
+                    <div class="form-field">
+                        <label for="port">Puerto</label>
+                        <input type="number" id="port" name="port" min="0" max="65535" placeholder="80">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="section">
+                <legend>Rango de Resultados</legend>
+                <div class="form-group">
+                    <div class="form-field">
+                        <label for="from">Desde</label>
+                        <input type="number" id="from" name="from" min="0" value="0">
+                    </div>
+                    <div class="form-field">
+                        <label for="to">Hasta</label>
+                        <input type="number" id="to" name="to" min="1" value="10">
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-actions">
+                <button type="submit">Buscar</button>
+            </div>
+        </form>
+        <div class="curl-section">
+            <div class="curl-label">
+                <span>Comando <code>curl</code> generado:</span>
+                <button id="copyCurl" type="button" title="Copiar comando curl">📋 Copiar</button>
+            </div>
+            <pre id="curlCommand" class="curl-command">curl ...</pre>
+        </div>
+        <div class="results" id="results"></div>
+    </div>
+    <script>
+        const form = document.getElementById('searchForm');
+        const resultsDiv = document.getElementById('results');
+        const curlPre = document.getElementById('curlCommand');
+        const copyBtn = document.getElementById('copyCurl');
+        const paramOrder = ['title','domain','ip','port','html','from','to'];
+
+        function buildParams() {
+            const params = [];
+            paramOrder.forEach(id => {
+                const val = document.getElementById(id).value.trim();
+                if(val) params.push(`${id}=${encodeURIComponent(val)}`);
+            });
+            return params;
+        }
+
+        function buildCurl() {
+            const params = buildParams();
+            const url = `/search?${params.join('&')}`;
+            return `curl -s "http://localhost:5000${url}"`;
+        }
+
+        function updateCurl() {
+            curlPre.textContent = buildCurl();
+        }
+
+        form.addEventListener('input', updateCurl);
+        form.addEventListener('change', updateCurl);
+        document.addEventListener('DOMContentLoaded', updateCurl);
+
+        copyBtn.addEventListener('click', function() {
+            navigator.clipboard.writeText(curlPre.textContent);
+            copyBtn.textContent = '¡Copiado!';
+            copyBtn.classList.add('copied');
+            setTimeout(() => {
+                copyBtn.textContent = 'Copiar';
+                copyBtn.classList.remove('copied');
+            }, 1200);
+        });
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            resultsDiv.innerHTML = '<span class="loader"></span> Buscando...';
+            const params = buildParams();
+            const url = `/search?${params.join('&')}`;
+            try {
+                const res = await fetch(url);
+                if(!res.ok) throw new Error('Error en la búsqueda');
+                const data = await res.json();
+                resultsDiv.textContent = JSON.stringify(data, null, 2);
+            } catch(err) {
+                resultsDiv.textContent = 'Error: ' + err.message;
+            }
+        });
+    </script>
+</body>
+</html>
